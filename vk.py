@@ -4,7 +4,7 @@ from time import sleep
 import vk_auth
 
 app_id = '4990791'
-access_token = vk_auth.auth('89525932725', 'vkpassvk', app_id, 'offline,messages')[0]
+access_token = vk_auth.auth('vktool@mail.ru', 'vkpassvk', app_id, 'offline,messages')[0]
 
 publics_list = open('publics.json').read()
 publics_list = json.loads(publics_list)
