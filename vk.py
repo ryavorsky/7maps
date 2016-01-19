@@ -1,8 +1,10 @@
 import urllib2
 import json
 from time import sleep
+import vk_auth
 
-access_token='33af13dca52e298e70955c3da06f81576023434677c738bf113b5b1335f4f657d74b41c996fb826ebd944'
+app_id = '4990791'
+access_token = vk_auth.auth('89525932725', 'vkpassvk', app_id, 'offline,messages')[0]
 
 publics_list = open('publics.json').read()
 publics_list = json.loads(publics_list)
@@ -39,6 +41,7 @@ for i in range (len(publics_list['public_ids'])):
 
 edge_num = 0
 for user in users:
+	print user
 	friends_url = 'https://api.vk.com/method/friends.get?access_token=' + access_token + '&fields=name&user_id=' + str(user)
 	friends = urllib2.urlopen(friends_url).read()
 	friends = json.loads(friends)
