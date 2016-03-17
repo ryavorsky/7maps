@@ -22,11 +22,14 @@ publics_list = json.loads(publics_list)
 sex = ['F', 'M']
 
 title = ['<?xml version="1.0" encoding="UTF-8" standalone="no"?>', '<graphml xmlns="http://graphml.graphdrawing.org/xmlns"', ' xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"', ' xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://www.yworks.com/xml/schema/graphml/1.1/ygraphml.xsd"', ' xmlns:y="http://www.yworks.com/xml/graphml"', ' xmlns:yed="http://www.yworks.com/xml/yed/3">', '  <key for="node" id="d1" yfiles.type="nodegraphics"/>', '  <graph edgedefault="directed" id="G">']
-graph = open("graph.graphml", 'w')
+graph_people = open("graph_people.graphml", 'w')
+graph_groups = open("graph_groups.graphml", 'w')
 for line in title:
-	print >>graph, line
+	print >>graph_people, line
+	print >>graph_groups, line
+
 fout = open('users.csv', 'w')
-fout.write('id,link,name,sex,bdate,age,city,university,count_posts,count_reposts,count_likes,count_comments\n')
+fout.write('id,link,name,sex,bdate,age,city,university,count_unique_posts,count_reposts,count_likes,count_comments,count_unique_reposts,count_friends,count_followers\n')
 users=[]
 for i in range (len(publics_list['public_ids'])):
 	offset = 0;
@@ -90,6 +93,7 @@ for i in range (len(publics_list['public_ids'])):
 					count_reposts = 0
 					count_likes = 0
 					count_comments = 0
+					count_unique_reposts = 0
 					while (wall_offset < wall_count and date_diff.days < 366):
 						wall = 'https://api.vk.com/method/wall.get?access_token=' + access_token + '&filter=owner&offset=' + str(wall_offset) + '&count=100&owner_id=' + str(member['uid'])
 						try:
@@ -107,21 +111,49 @@ for i in range (len(publics_list['public_ids'])):
 									count_comments += post['comments']['count']
 									if post['post_type'] == 'post':
 										count_original +=1
+										count_unique_reposts += post['reposts']['count']
 									else:
 										count_reposts += 1
 							wall_offset += 100
 						else:
 							wall_count = 0
 
-					fout.write('%d,%s,%s,%s,%s,%s,%s,%s,%d,%d,%d,%d\n' % (member['uid'], 'http://vk.com/id' + str(member['uid']), member['first_name'].encode("utf-8") + ' ' + member['last_name'].encode("utf-8"), sex[member['sex']-1], bdate, str(age), city, university, count_original, count_reposts, count_likes, count_comments))
+					count_friends = 0
+					friends_url = 'https://api.vk.com/method/friends.get?access_token=' + access_token + '&fields=name&user_id=' + str(member['uid'])
+					try:
+						friends = get_json(friends_url)
+					except:
+						print 'failed'
+					if ('response' in friends):
+						count_friends = len(friends['response'])
+
+					count_followers = 0
+					followers_url = 'https://api.vk.com/method/users.getFollowers?access_token=' + access_token + '&count=0&user_id=' + str(member['uid'])
+					try:
+						followers = get_json(followers_url)
+					except:
+						print 'failed'
+					if ('response' in followers):
+						count_followers = followers['response']['count']
+
+					fout.write('%d,%s,%s,%s,%s,%s,%s,%s,%d,%d,%d,%d,%d,%d,%d\n' % (member['uid'], 'http://vk.com/id' + str(member['uid']), member['first_name'].encode("utf-8") + ' ' + member['last_name'].encode("utf-8"), sex[member['sex']-1], bdate, str(age), city, university, count_original, count_reposts, count_likes, count_comments,count_unique_reposts,count_friends,count_followers))
 				
-					print >>graph, '    <node id="' + str(member['uid']) + '">'
-					print >>graph, '      <data key="d1">'
-					print >>graph, '        <y:ShapeNode>'
-					print >>graph, '          <y:NodeLabel>' + member['first_name'].encode("utf-8") + ' ' + member['last_name'].encode("utf-8") + '</y:NodeLabel> '
-					print >>graph, '        </y:ShapeNode>'
-					print >>graph, '      </data>'
-					print >>graph, '    </node>'
+					print >>graph_people, '    <node id="' + str(member['uid']) + '">'
+					print >>graph_people, '      <data key="d1">'
+					print >>graph_people, '        <y:ShapeNode>'
+					print >>graph_people, '          <y:NodeLabel>' + member['first_name'].encode("utf-8") + ' ' + member['last_name'].encode("utf-8") + '</y:NodeLabel> '
+					print >>graph_people, '        </y:ShapeNode>'
+					print >>graph_people, '      </data>'
+					print >>graph_people, '    </node>'
+
+					print >>graph_groups, '    <node id="' + str(member['uid']) + '">'
+					print >>graph_groups, '      <data key="d1">'
+					print >>graph_groups, '        <y:ShapeNode>'
+					print >>graph_groups, '          <y:NodeLabel>' + member['first_name'].encode("utf-8") + ' ' + member['last_name'].encode("utf-8") + '</y:NodeLabel> '
+					print >>graph_groups, '        </y:ShapeNode>'
+					print >>graph_groups, '      </data>'
+					print >>graph_groups, '    </node>'
+
 		if (offset + 1000 > members_count):
 			break
 		offset += 1000
@@ -129,6 +161,7 @@ for i in range (len(publics_list['public_ids'])):
 fout.close()
 
 edge_num = 0
+group_list = []
 for user in users:
 	print user
 	friends_url = 'https://api.vk.com/method/friends.get?access_token=' + access_token + '&fields=name&user_id=' + str(user)
@@ -140,7 +173,33 @@ for user in users:
 		for friend in friends['response']:
 			if (friend['uid'] > user):
 				if (friend['uid'] in users):
-					print >>graph, '<edge id="e' + str(edge_num) + '" source="' + str(user) + '" target="' + str(friend['uid']) + '"/>'
+					print >>graph_people, '<edge id="e' + str(edge_num) + '" source="' + str(user) + '" target="' + str(friend['uid']) + '"/>'
 					edge_num += 1
-print >>graph, '  </graph>'
-print >>graph, '</graphml>'
+
+	group_url = 'https://api.vk.com/method/groups.get?access_token=' + access_token + '&extended=1&count=1000&user_id=' + str(user)
+	try:
+		groups = get_json(group_url)
+	except:
+		print 'failed'
+	if ('response' in groups):
+		del groups['response'][0]
+		for group in groups['response']:
+			if (group['gid'] not in group_list):
+				group_list.append(group['gid'])
+				print >>graph_groups, '    <node id="' + str(group['gid']) + '">'
+				print >>graph_groups, '      <data key="d1">'
+				print >>graph_groups, '        <y:ShapeNode>'
+				print >>graph_groups, '          <y:NodeLabel>' + group['name'].encode("utf-8") + '</y:NodeLabel> '
+				print >>graph_groups, '        </y:ShapeNode>'
+				print >>graph_groups, '      </data>'
+				print >>graph_groups, '    </node>'
+
+			print >>graph_groups, '    <edge id="e' + str(edge_num) + '" source="' + str(user) + '" target="' + str(group['gid']) + '"/>'
+			edge_num += 1
+
+
+print >>graph_people, '  </graph>'
+print >>graph_people, '</graphml>'
+
+print >>graph_groups, '  </graph>'
+print >>graph_groups, '</graphml>'
