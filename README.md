@@ -1,2 +1,0 @@
-# 7maps
-Community visualization
