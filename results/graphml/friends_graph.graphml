@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://www.yworks.com/xml/schema/graphml/1.1/ygraphml.xsd"
+ xmlns:y="http://www.yworks.com/xml/graphml"
+ xmlns:yed="http://www.yworks.com/xml/yed/3">
+  <key for="node" id="d1" yfiles.type="nodegraphics"/>
+  <graph edgedefault="directed" id="G">
+    <node id="8974997">
+      <data key="d1">
+        <y:ShapeNode>
+          <y:NodeLabel>Сергей Королев</y:NodeLabel> 
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="9035501">
+      <data key="d1">
+        <y:ShapeNode>
+          <y:NodeLabel>Арман Туганбаев</y:NodeLabel> 
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="9081082">
+      <data key="d1">
+        <y:ShapeNode>
+          <y:NodeLabel>Илья Горшков</y:NodeLabel> 
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="9666272">
+      <data key="d1">
+        <y:ShapeNode>
+          <y:NodeLabel>Никита Савельев</y:NodeLabel> 
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="11633990">
+      <data key="d1">
+        <y:ShapeNode>
+          <y:NodeLabel>Валера Гиркин</y:NodeLabel> 
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="17335563">
+      <data key="d1">
+        <y:ShapeNode>
+          <y:NodeLabel>Николай Якушкин</y:NodeLabel> 
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="24598990">
+      <data key="d1">
+        <y:ShapeNode>
+          <y:NodeLabel>Настя Ведь</y:NodeLabel> 
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="25438839">
+      <data key="d1">
+        <y:ShapeNode>
+          <y:NodeLabel>Александр Седов</y:NodeLabel> 
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="28583476">
+      <data key="d1">
+        <y:ShapeNode>
+          <y:NodeLabel>Анастасия Маликова</y:NodeLabel> 
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="76466151">
+      <data key="d1">
+        <y:ShapeNode>
+          <y:NodeLabel>Данат Ерманов</y:NodeLabel> 
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="80084140">
+      <data key="d1">
+        <y:ShapeNode>
+          <y:NodeLabel>Геннадий Фарафонов</y:NodeLabel> 
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="98119345">
+      <data key="d1">
+        <y:ShapeNode>
+          <y:NodeLabel>Ильдар Ломов</y:NodeLabel> 
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="113769428">
+      <data key="d1">
+        <y:ShapeNode>
+          <y:NodeLabel>Александр Ситкарев</y:NodeLabel> 
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="125204353">
+      <data key="d1">
+        <y:ShapeNode>
+          <y:NodeLabel>Диана Гайнутдинова</y:NodeLabel> 
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="143698472">
+      <data key="d1">
+        <y:ShapeNode>
+          <y:NodeLabel>Kseniya Valchuk</y:NodeLabel> 
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="146894240">
+      <data key="d1">
+        <y:ShapeNode>
+          <y:NodeLabel>Combo Breaker</y:NodeLabel> 
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="154301983">
+      <data key="d1">
+        <y:ShapeNode>
+          <y:NodeLabel>Матвей Кашкинов</y:NodeLabel> 
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="210993964">
+      <data key="d1">
+        <y:ShapeNode>
+          <y:NodeLabel>Мария Шадричева</y:NodeLabel> 
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="250570961">
+      <data key="d1">
+        <y:ShapeNode>
+          <y:NodeLabel>Григорий Скворцов</y:NodeLabel> 
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="262988651">
+      <data key="d1">
+        <y:ShapeNode>
+          <y:NodeLabel>Диана Полонская</y:NodeLabel> 
+        </y:ShapeNode>
+      </data>
+    </node>
+<edge id="e0" source="8974997" target="11633990"/>
+<edge id="e1" source="8974997" target="17335563"/>
+<edge id="e2" source="8974997" target="24598990"/>
+<edge id="e3" source="8974997" target="28583476"/>
+<edge id="e4" source="8974997" target="76466151"/>
+<edge id="e5" source="8974997" target="98119345"/>
+<edge id="e6" source="8974997" target="113769428"/>
+<edge id="e7" source="8974997" target="125204353"/>
+<edge id="e8" source="8974997" target="143698472"/>
+<edge id="e9" source="8974997" target="146894240"/>
+<edge id="e10" source="8974997" target="210993964"/>
+<edge id="e11" source="8974997" target="250570961"/>
+<edge id="e12" source="8974997" target="262988651"/>
+<edge id="e95" source="9035501" target="9666272"/>
+<edge id="e96" source="9035501" target="11633990"/>
+<edge id="e97" source="9035501" target="17335563"/>
+<edge id="e98" source="9035501" target="24598990"/>
+<edge id="e99" source="9035501" target="76466151"/>
+<edge id="e100" source="9035501" target="113769428"/>
+<edge id="e101" source="9035501" target="143698472"/>
+<edge id="e102" source="9035501" target="154301983"/>
+<edge id="e164" source="9081082" target="11633990"/>
+<edge id="e165" source="9081082" target="24598990"/>
+<edge id="e166" source="9081082" target="28583476"/>
+<edge id="e167" source="9081082" target="80084140"/>
+<edge id="e168" source="9081082" target="98119345"/>
+<edge id="e169" source="9081082" target="125204353"/>
+<edge id="e170" source="9081082" target="250570961"/>
+<edge id="e189" source="9666272" target="11633990"/>
+<edge id="e190" source="9666272" target="17335563"/>
+<edge id="e191" source="9666272" target="24598990"/>
+<edge id="e192" source="9666272" target="113769428"/>
+<edge id="e193" source="9666272" target="143698472"/>
+<edge id="e194" source="9666272" target="154301983"/>
+<edge id="e195" source="11633990" target="17335563"/>
+<edge id="e196" source="11633990" target="24598990"/>
+<edge id="e197" source="11633990" target="76466151"/>
+<edge id="e198" source="11633990" target="113769428"/>
+<edge id="e199" source="11633990" target="125204353"/>
+<edge id="e200" source="11633990" target="143698472"/>
+<edge id="e201" source="11633990" target="146894240"/>
+<edge id="e202" source="11633990" target="154301983"/>
+<edge id="e203" source="11633990" target="210993964"/>
+<edge id="e204" source="11633990" target="262988651"/>
+<edge id="e225" source="17335563" target="24598990"/>
+<edge id="e226" source="17335563" target="25438839"/>
+<edge id="e227" source="17335563" target="28583476"/>
+<edge id="e228" source="17335563" target="76466151"/>
+<edge id="e229" source="17335563" target="80084140"/>
+<edge id="e230" source="17335563" target="98119345"/>
+<edge id="e231" source="17335563" target="113769428"/>
+<edge id="e232" source="17335563" target="125204353"/>
+<edge id="e233" source="17335563" target="143698472"/>
+<edge id="e234" source="17335563" target="146894240"/>
+<edge id="e235" source="17335563" target="154301983"/>
+<edge id="e236" source="17335563" target="210993964"/>
+<edge id="e237" source="17335563" target="250570961"/>
+<edge id="e238" source="17335563" target="262988651"/>
+<edge id="e251" source="24598990" target="25438839"/>
+<edge id="e252" source="24598990" target="28583476"/>
+<edge id="e253" source="24598990" target="76466151"/>
+<edge id="e254" source="24598990" target="80084140"/>
+<edge id="e255" source="24598990" target="98119345"/>
+<edge id="e256" source="24598990" target="113769428"/>
+<edge id="e257" source="24598990" target="125204353"/>
+<edge id="e258" source="24598990" target="143698472"/>
+<edge id="e259" source="24598990" target="146894240"/>
+<edge id="e260" source="24598990" target="154301983"/>
+<edge id="e261" source="24598990" target="210993964"/>
+<edge id="e262" source="24598990" target="250570961"/>
+<edge id="e263" source="24598990" target="262988651"/>
+<edge id="e318" source="25438839" target="76466151"/>
+<edge id="e319" source="25438839" target="125204353"/>
+<edge id="e320" source="25438839" target="143698472"/>
+<edge id="e321" source="25438839" target="146894240"/>
+<edge id="e322" source="25438839" target="262988651"/>
+<edge id="e449" source="28583476" target="76466151"/>
+<edge id="e450" source="28583476" target="80084140"/>
+<edge id="e451" source="28583476" target="125204353"/>
+<edge id="e452" source="28583476" target="210993964"/>
+<edge id="e453" source="28583476" target="250570961"/>
+<edge id="e540" source="76466151" target="125204353"/>
+<edge id="e541" source="76466151" target="143698472"/>
+<edge id="e542" source="76466151" target="146894240"/>
+<edge id="e543" source="76466151" target="154301983"/>
+<edge id="e544" source="76466151" target="262988651"/>
+<edge id="e553" source="80084140" target="125204353"/>
+<edge id="e554" source="80084140" target="146894240"/>
+<edge id="e608" source="98119345" target="146894240"/>
+<edge id="e609" source="98119345" target="250570961"/>
+<edge id="e610" source="98119345" target="262988651"/>
+<edge id="e612" source="113769428" target="125204353"/>
+<edge id="e613" source="113769428" target="143698472"/>
+<edge id="e614" source="113769428" target="154301983"/>
+<edge id="e615" source="113769428" target="210993964"/>
+<edge id="e717" source="125204353" target="146894240"/>
+<edge id="e718" source="125204353" target="154301983"/>
+<edge id="e719" source="125204353" target="210993964"/>
+<edge id="e720" source="125204353" target="250570961"/>
+<edge id="e721" source="125204353" target="262988651"/>
+<edge id="e795" source="143698472" target="146894240"/>
+<edge id="e796" source="143698472" target="154301983"/>
+<edge id="e797" source="143698472" target="210993964"/>
+<edge id="e798" source="143698472" target="262988651"/>
+<edge id="e827" source="146894240" target="154301983"/>
+<edge id="e828" source="146894240" target="250570961"/>
+<edge id="e829" source="146894240" target="262988651"/>
+<edge id="e1047" source="250570961" target="262988651"/>
+  </graph>
+</graphml>
