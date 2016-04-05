@@ -7,6 +7,7 @@ from time import sleep
 from datetime import datetime, timedelta
 import vk_auth
 import sys
+import csv
 
 def get_json(url):
 	getjson = urllib.request.urlopen(url).readall().decode('utf-8')
@@ -14,10 +15,8 @@ def get_json(url):
 	sleep(0.25)
 	return getjson
 
+app_ids = ['5396820','5397060','5399458','5399462','5399464']
 app_id = '5397060'
-access_token = vk_auth.auth('vktool@mail.ru', 'vkpassvk', app_id, 'offline')[0]
-
-print (access_token)
 
 count_downloaded = 0
 
@@ -29,14 +28,21 @@ publics_list = json.loads(publics_list)
 
 if (len(sys.argv) == 2):
 	file_name = '../results/csv/members_' + str(publics_list['public_ids'][0]) + '_' + sys.argv[1] + '-end.csv'
-elif (len(sys.argv) == 3):
+elif (len(sys.argv) >= 3):
 	file_name = '../results/csv/members_' + str(publics_list['public_ids'][0]) + '_' + sys.argv[1] + '-' + str(int(sys.argv[1]) + int(sys.argv[2])) + '.csv'
+	if (len(sys.argv) == 4):
+		app_id = app_ids[sys.argv[3]]
 else:
 	file_name = '../results/csv/members_' + str(publics_list['public_ids'][0]) + '.csv'
 fout = open(file_name, 'w')
+csvwriter = csv.writer(fout)
 
-fout.write('№,id,link,name,sex,bdate,age,city,university,count_unique_posts,count_reposts,count_likes,count_comments,count_unique_reposts,count_friends,count_followers\n')
+csvwriter.writerows([['№','id','link','name','sex','bdate','age','city','university','count_unique_posts','count_reposts','count_likes','count_comments','count_unique_reposts','count_friends','count_followers']])
 users=[]
+
+access_token = vk_auth.auth('vktool@mail.ru', 'vkpassvk', app_id, 'offline')[0]
+
+print (access_token)
 
 offset = 0
 number = 0
@@ -77,6 +83,7 @@ while True:
 				if (count_downloaded % 25 == 0):
 					fout.close()
 					fout = open(file_name, 'a')
+					csvwriter = csv.writer(fout)
 
 				users.append(member['uid'])
 
@@ -176,7 +183,7 @@ while True:
 					print ('failed')
 				if ('response' in followers):
 					count_followers = followers['response']['count']
-				fout.write('%d,%d,%s,%s,%s,%s,%s,%s,%s,%d,%d,%d,%d,%d,%d,%d\n' % (number, member['uid'], 'http://vk.com/id' + str(member['uid']), str(member['first_name'] + ' ' + member['last_name']), str(sex[member['sex']-1]), str(bdate), str(age), str(city), str(university), count_original, count_reposts, count_likes, count_comments,count_unique_reposts,count_friends,count_followers))
+				csvwriter.writerows([[number, member['uid'], 'http://vk.com/id' + str(member['uid']), str(member['first_name'] + ' ' + member['last_name']), str(sex[member['sex']-1]), str(bdate), str(age), str(city), str(university), count_original, count_reposts, count_likes, count_comments,count_unique_reposts,count_friends,count_followers]])
 				number += 1
 
 	if (offset + 1000 > members_count):
