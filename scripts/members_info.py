@@ -71,7 +71,8 @@ while True:
 				if (len(sys.argv) > 2):
 					if (sys.argv[2] != '0'):
 						if (count_downloaded == count_people_to_download + 1):
-							break
+							fout.close()
+							sys.exit()
 
 				if (count_downloaded % 25 == 0):
 					fout.close()
