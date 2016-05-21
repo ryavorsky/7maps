@@ -1,0 +1,2 @@
+va=$(python3 count_group_members.py 2>&1)
+echo $va

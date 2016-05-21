@@ -15,7 +15,7 @@ def get_json(url):
 	sleep(0.3)
 	return getjson
 
-app_id = '5401637'
+app_id = '5406914'
 access_token = vk_auth.auth('vktool@mail.ru', 'vkpassvk', app_id, 'offline')[0]
 print (access_token)
 

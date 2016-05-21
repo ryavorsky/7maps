@@ -10,7 +10,7 @@ import csv
 import os
 import vk_auth
 
-app_id = '5397060'
+app_id = '5406915'
 access_token = vk_auth.auth('vktool@mail.ru', 'vkpassvk', app_id, 'offline')[0]
 print (access_token)
 
@@ -27,7 +27,7 @@ logs_folder = '../../logs/' + publics_list['fail_checker_logs_folder'][0]
 logs = os.listdir(logs_folder)
 
 count_fails = 0
-fails_corrected = 0
+failed_corrections = 0
 
 for log in logs:
 	curr_log = open('../../logs/' + publics_list['fail_checker_logs_folder'][0] + '/' + log)
@@ -74,6 +74,7 @@ for log in logs:
 					user_info = get_json(url)
 				except:
 					print ('Failed getting city__' + str(row[1]))
+					failed_corrections += 1
 					logs_after_writer .writerows([['city', str(member['uid'])]])
 				if ('response' in user_info):
 					city_code = user_info['response'][0]['city']
@@ -81,11 +82,11 @@ for log in logs:
 					try:
 						city_info = get_json(city_info)
 					except:
-						print ('failed getting city__' + str(member['uid']))
-						logs_after_writer.writerows([['city', str(member['uid'])]])
+						failed_corrections += 1
+						print ('failed getting city__' + str(row[1]))
+						logs_after_writer.writerows([['city', str(row[1])]])
 					if 'response' in city_info:
 						city =  city_info['response'][0]['name']
-				fails_corrected += 1
 
 			if ('wall' in failed_users[row[1]]):
 				curr_time = datetime.now()
@@ -102,8 +103,9 @@ for log in logs:
 					try:
 						wall = get_json(wall)
 					except:
-						print ('failed getting wall__' + str(member['uid']))
-						logs_after_writer.writerows([['wall', str(member['uid'])]])
+						print ('failed getting wall__' + str(row[1]))
+						failed_corrections += 1
+						logs_after_writer.writerows([['wall', str(row[1])]])
 					if 'response' in wall:
 						wall_count = wall['response'][0]
 						del wall['response'][0]
@@ -122,7 +124,6 @@ for log in logs:
 						wall_offset += 100
 					else:
 						wall_count = 0
-				fails_corrected += 1
 
 			if ('friends' in failed_users[row[1]]):
 				count_friends = 0
@@ -130,8 +131,9 @@ for log in logs:
 				try:
 					friends = get_json(friends_url)
 				except:
-					print ('failed getting friends__' + str(member['uid']))
-					logs_after_writer.writerows([['friends', str(member['uid'])]])
+					failed_corrections += 1
+					print ('failed getting friends__' + str(row[1]))
+					logs_after_writer.writerows([['friends', str(row[1])]])
 				if ('response' in friends):
 					count_friends = len(friends['response'])
 					if (count_friends == 5000):
@@ -139,11 +141,11 @@ for log in logs:
 						try:
 							friends = get_json(friends_url)
 						except:
-							print ('failed grtting friends__' + str(member['uid']))
-							logs_after_writer.writerows([['friends', str(member['uid'])]])
+							failed_corrections += 1
+							print ('failed grtting friends__' + str(row[1]))
+							logs_after_writer.writerows([['friends', str(row[1])]])
 						if ('response' in friends):
 							count_friends += len(friends['response'])
-				fails_corrected += 1
 
 			if ('followers' in failed_users[row[1]]):
 				count_followers = 0
@@ -151,11 +153,11 @@ for log in logs:
 				try:
 					followers = get_json(followers_url)
 				except:
-					logs_after_writer.writerows([['followers', str(member['uid'])]])
-					print ('failed getting followers__' + str(member['uid']))
+					failed_corrections += 1
+					logs_after_writer.writerows([['followers', str(row[1])]])
+					print ('failed getting followers__' + str(row[1]))
 				if ('response' in followers):
 					count_followers = followers['response']['count']
-				fails_corrected += 1
 
 			result_after_writer.writerows([[row[0],row[1],row[2],row[3],row[4],row[5],row[6],city,row[8],count_original,count_reposts,count_likes,count_comments,count_unique_reposts,count_friends,count_followers]])
  
@@ -165,10 +167,11 @@ result_before.close()
 result_after.close()
 logs_after.close()
 
-os.remove('../../logs/' + publics_list['fail_checker_logs_folder'][0] + '/' + log)
-os.rename('../../logs/' + publics_list['fail_checker_logs_folder'][0] + '/tmp_' + log, '../../logs/' + publics_list['fail_checker_logs_folder'][0] + '/' + log)
+for log in logs:
+	os.remove('../../logs/' + publics_list['fail_checker_logs_folder'][0] + '/' + log)
+	os.rename('../../logs/' + publics_list['fail_checker_logs_folder'][0] + '/tmp_' + log, '../../logs/' + publics_list['fail_checker_logs_folder'][0] + '/' + log)
 
-os.remove('../../results/csv/' + log[4:])
-os.rename(('../../results/csv/' + log[4:]).replace('.csv', '_tmp.csv'), '../../results/csv/' + log[4:])
+	os.remove('../../results/csv/' + log[4:])
+	os.rename(('../../results/csv/' + log[4:]).replace('.csv', '_tmp.csv'), '../../results/csv/' + log[4:])
 
-print ('Completed. ' + str(fails_corrected) + ' errors out of ' + str(count_fails) + ' were corrected') 
+print ('Completed. ' + str(count_fails - failed_corrections) + ' errors out of ' + str(count_fails) + ' were corrected') 
